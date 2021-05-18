@@ -1,0 +1,16 @@
+{
+    "name": "kkowalczyk/phpunit",
+    "description": "PHPUnit test",
+    "authors": [
+        {
+            "name": "Kamil Kowalczyk",
+            "email": "kkowalczyk@ifxpayments.com"
+        }
+    ],
+    "require": {
+        "symfony/console": "^5.2"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.2"
+    }
+}
