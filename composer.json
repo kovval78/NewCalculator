@@ -7,6 +7,11 @@
             "email": "kkowalczyk@ifxpayments.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
     "require": {
         "symfony/console": "^5.2"
     },
