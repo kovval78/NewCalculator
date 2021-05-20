@@ -8,6 +8,10 @@ class Calculator
 {
 
     public function calculate($a, $b, $sign){
+        if (!is_numeric($a) || ($b)){
+            throw new RuntimeException('Numbers have to be either integer nor float');
+        }
+
         if ($sign == '+'){
             return $this->addition($a, $b);
         }
@@ -43,7 +47,10 @@ class Calculator
 
     public function division($a, $b)
     {
-        return $a / $b;
+        if ($b != 0){
+            return $a / $b;
+        }
+         throw new RuntimeException('You cannot divide by zero');
     }
 }
 

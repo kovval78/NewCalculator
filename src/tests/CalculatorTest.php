@@ -3,21 +3,53 @@ declare(strict_types=1);
 
 namespace App\tests;
 
-use PHPUnit\Framework\TestCase;
 use App\Calculator\Calculator;
+use http\Exception\InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 
-class CalculatorTest extends TestCase
+final class CalculatorTest extends TestCase
 {
+    public function testException()
+    {
+        $this->expectException(InvalidArgumentException::class);
+    }
 
-    public function testAdd()
+    /**
+     * @dataProvider additionProvider
+     */
+    public function testIsAdditionWorks($a, $b,$expected)
     {
         $calc = new Calculator();
-        $result = $calc->calculate(20, 10, '-');
+        $this->assertSame($expected, $calc->addition($a, $b));
+}
 
-        $this->
+    /**
+     * @dataProvider additionProvider
+     */
+    public function testIsVariablesAreNumeric($a, $b)
+    {
+        $calc = new Calculator();
+        $this->assertIsNumeric($calc->addition($a, $b));
+    }
 
+    /**
+     * @dataProvider additionProvider
+     */
+    public function testIsOutputEmpty($a, $b)
+    {
+        $calc = new Calculator();
+        $this->assertNotEmpty($calc->addition($a, $b));
+    }
 
-//        $result1 = $calculator->addition(20, 50);
-//        $this->assertEquals(70, $result1);
+        public function additionProvider(): array
+    {
+        return [
+            [-2, -2, -4],
+            [1, -2, -1],
+            [0, 1, 1],
+            [1, 0, 1],
+            [2.3, 1.0, 3.3],
+            [0, 'a', 0]
+        ];
     }
 }
