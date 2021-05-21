@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Calculator\Calculator;
+use SebastianBergmann\GlobalState\RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -28,17 +29,23 @@ class CountCommand extends Command
             $fNumber = $helper->ask($input, $output, new Question(
                 "Enter first number: ", 0
             ));
+            if(!is_numeric($fNumber)) {
+                throw new \RuntimeException('The number must be integer or float');
+            }
             $sNumber = $helper->ask($input, $output, new Question(
                 "Enter second number: ", 0
             ));
+            if(!is_numeric($sNumber)) {
+                throw new \RuntimeException('The number must be integer or float');
+            }
             $mathSign = $helper->ask($input, $output, new Question(
                 "What action do you want to perform? You can use math signs: <comment>'+', '-', '*', '/'</comment> :",
                 0
             ));
 
-            $addition = new Calculator();
+            $calc = new Calculator();
             try {
-                $result = $addition->calculate($fNumber, $sNumber, $mathSign);
+                $result = $calc->calculate($fNumber, $sNumber, $mathSign);
                 $output->writeln('<info>' . $fNumber . '</info>');
                 $output->writeln('<info>' . $sNumber . '</info>');
                 $output->writeln('<error>' . $result . '</error>');
