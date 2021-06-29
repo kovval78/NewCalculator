@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use App\Calculator\Calculator;
+use App\Receivers\Calculator;
 use PHPUnit\Framework\TestCase;
 
 final class CalculatorTest extends TestCase
@@ -35,6 +35,12 @@ final class CalculatorTest extends TestCase
         $this->assertSame(2, $this->calc->calculate(4, 2, Calculator::OPERATOR_DIVISION));
     }
 
+//    public function testException(): void
+//    {
+//        $this->expectException(\InvalidArgumentException::class);
+//        $this->assertSame(2, $this->calc->calculate(4, 2, '_'));
+//
+//    }
     /**
      * @dataProvider additionProvider
      */
@@ -121,7 +127,7 @@ final class CalculatorTest extends TestCase
         ];
     }
 
-    public function testDivisionByZero()
+    public function testDivisionByZero(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->calc->calculate(3, 0, Calculator::OPERATOR_DIVISION);

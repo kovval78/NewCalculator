@@ -3,8 +3,15 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+use App\Commands\CountCommand;
 use Symfony\Component\Console\Application;
-use App\Command\CountCommand;
+
+$operators = [
+    '+' => 'AddCommand',
+    '-' => 'SubtractCommand',
+    'x' => 'MultiplyCommand',
+    '/' => 'DivideCommand'
+];
 
 $app = new Application();
 $app->add(new CountCommand());
